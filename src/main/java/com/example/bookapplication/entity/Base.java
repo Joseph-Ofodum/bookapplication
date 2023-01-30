@@ -10,6 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
+
 public abstract class Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
