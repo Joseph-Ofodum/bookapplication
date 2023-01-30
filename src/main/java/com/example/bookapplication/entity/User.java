@@ -15,6 +15,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name="user_tbl")
 
+
 public class User extends Base{
 
     private String name;
