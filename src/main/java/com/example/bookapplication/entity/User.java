@@ -20,8 +20,11 @@ public class User extends Base{
 
     private String name;
 
+    private String password;
+
     private Gender gender;
 
     @Column(unique=true, nullable=false)
     private String email;
+
 }

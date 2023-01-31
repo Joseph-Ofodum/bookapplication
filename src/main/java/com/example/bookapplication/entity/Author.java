@@ -2,10 +2,10 @@ package com.example.bookapplication.entity;
 
 
 import com.example.bookapplication.enums.Gender;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Date;
 
 @Builder
 @Entity
@@ -22,4 +22,26 @@ public class Author extends Base{
 
     @Column(name="author_biography")
     private String bio;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "createdAt")
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="last_updated")
+    private Date updatedAt;
+
+
+    @PrePersist
+    public void createdAt(){
+
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    public void updatedAt(){
+
+        this.updatedAt = new Date();
+    }
+
 }
