@@ -1,10 +1,11 @@
 package com.example.bookapplication.entity;
 
 import com.example.bookapplication.enums.Gender;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.example.bookapplication.enums.Role;
 import lombok.*;
+import org.jetbrains.annotations.NotNull;
+
+import javax.persistence.*;
 
 @Builder
 @Entity
@@ -22,7 +23,13 @@ public class User extends Base{
 
     private String password;
 
+    private Boolean verificationStatus;
+
+    private boolean isActive;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
+    @NotNull
+    private Role role;
 
     @Column(unique=true, nullable=false)
     private String email;

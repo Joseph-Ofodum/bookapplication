@@ -1,8 +1,8 @@
 package com.example.bookapplication.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
-
+import javax.persistence.*;
+import java.util.Date;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -10,7 +10,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
-
 public abstract class Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +18,26 @@ public abstract class Base {
 
     @GeneratedValue
     private UUID uuid;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "createdAt")
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="last_updated")
+    private Date updatedAt;
+
+
+    @PrePersist
+    public void createdAt(){
+
+        this.createdAt = new Date();
+    }
+
+    @PreUpdate
+    public void updatedAt(){
+
+        this.updatedAt = new Date();
+    }
 
 }

@@ -18,4 +18,23 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> NotRegistered(UserNotFoundException ne){
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(ne.getMessage());
+        errorResponse.setDebugMessage(ne.getDebugMessage());
+        errorResponse.setStatus(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ErrorResponse> tokenNotFound(InvalidTokenException ne) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(ne.getMessage());
+        errorResponse.setDebugMessage("Token not found");
+        errorResponse.setStatus(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+
+    }
+
 }

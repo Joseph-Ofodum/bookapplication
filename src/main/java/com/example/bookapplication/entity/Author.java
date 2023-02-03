@@ -2,10 +2,13 @@ package com.example.bookapplication.entity;
 
 
 import com.example.bookapplication.enums.Gender;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @Entity
@@ -16,32 +19,13 @@ import java.util.Date;
 @ToString
 @Table(name="author_tbl")
 public class Author extends Base{
+    @NotNull
     private String name;
-
     private Gender gender;
-
     @Column(name="author_biography")
     private String bio;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "createdAt")
-    private Date createdAt;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="last_updated")
-    private Date updatedAt;
-
-
-    @PrePersist
-    public void createdAt(){
-
-        this.createdAt = new Date();
-    }
-
-    @PreUpdate
-    public void updatedAt(){
-
-        this.updatedAt = new Date();
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy ="author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Book> book;
 
 }
