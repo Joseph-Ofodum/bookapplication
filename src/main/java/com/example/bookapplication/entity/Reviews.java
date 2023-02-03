@@ -1,8 +1,12 @@
 package com.example.bookapplication.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+
 import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @NoArgsConstructor
@@ -10,8 +14,12 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-@Table(name= "review-tbl")
+@Table(name= "review_tbl")
 public class Reviews extends Base{
     private String comments;
+    private Integer rating;
+    @ManyToOne
+    @JoinColumn(name="book_id")
+    private Book book;
 
 }
